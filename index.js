@@ -21,16 +21,34 @@ let standardItem = entry => {
 function getInput(){
   return $('#shopping-list-entry').val();
 }
-//check or uncheck items on the list by using "check button"
-
-//remove items permanently from list by hittin "delete"
 
 function main() {
   $('#js-shopping-list-form').submit(event => {
     event.preventDefault();
+    
     const userInput = getInput();
     standardItem(userInput);
   });
+
+  //check or uncheck items on the list by using "check button" use toggle
+
+  //search through the ul shopping list to access the shopping item class
+  //use toggleClass to enable/disable the css class "shopping-item_checked"
+
+  $('.shopping-list').on('click', '.shopping-item-toggle', function(event){ 
+    $(event.currentTarget).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
+  });
+
+  //remove items permanently from list by hitting "delete"
+
+  //essentially the same method we used to traverse through the toggle tree
+  //.remove() to delete the 'li' parent of the currentTarget.
+  
+  $('.shopping-list').on('click', '.shopping-item-delete', function(event){ 
+    $(event.currentTarget).closest('li').remove();
+  });
+  
 }
+
 
 $(main);
